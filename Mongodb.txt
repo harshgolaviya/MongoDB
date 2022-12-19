@@ -1,0 +1,271 @@
+
+
+MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas.
+
+MongoDB --> nosql , document 
+        -->cassandra,hbase
+sql -> RDMS 
+
+
+MongoDB Structure:
+------------------
+-> MongoDB Physical database contains several logical databases.
+-> Each database contains several collections. Collection is something
+    like table in relational database.
+-> Each collection contains several documents. Document is something
+like record/row in relational database.
+
+
+
+SQL Terms 		MongoDB Terms
+-----------------------------------------------------------------------
+Database 		Database
+Table 			Collection
+Entity/Row 		Document
+Column 			Key / Field
+Table Join 		Embedded Documents
+Primary Key 	        Primary Key (Default key _id provided by mongodb itself)
+
+
+
+Data Formats in MongoDB:
+------------------------
+10kb json: {name:'skillqode'}--->BSON and that BSON will be stored
+4kb End user/Developer will provide data in json form.
+In MongoDB server data will be stored in BSON Form.
+
+
+
+Key Characteristics of MongoDB database:
+----------------------------------------
+1. Installation and setup is very easy.
+2. All information related to a document will be stored in a single place.
+ To retrieve data, it is not required to perform join operations and
+hence retrieval is very fast.
+3. Documents are independent of each other and no schema. Hence
+we can store unstructured data like videos, audio files etc
+4. We can perform oprations like editing existing document, deleting
+document and inserting new documents very easily.
+5. Retrieval data is in the form of json which can be understandable by
+any programming language without any conversion (interoperability)
+
+
+
+
+MongoDB Shell vs MongoDB Server:
+--------------------------------
+Once we installed MongoDB, we will get MongoDB Shell and MongoDB
+Server.hese are Javascript based applicatio
+Tns.
+MongoDB Server is responsible to store our data in database. --> mongod
+MongoDB Shell is responsible to manage Server.               --> mongosh   
+
+mongod --dbpath "C:\data\db"
+
+
+
+Default Databases:
+------------------
+MongoDB Admin will use these default databases.
+> show dbs
+admin 0.000GB
+config 0.000GB
+local 0.000GB
+
+
+1. admin:
+---------
+admin database is used to store user authentication and authorization
+information like usernames,passwords,roles etc
+This database is used by administrators while creating,deleting and
+updating users and while assigning roles.
+
+
+2. config:
+----------
+To store configuration information of mongodb server.
+
+
+3. local:
+---------
+local database can be used by admin while performing replication
+process.
+
+
+db.version()
+db.help()
+db.showdbs
+use admin()
+
+
+How to create collection:
+-------------------------
+ db.crs
+{ "ok" : 1 }
+> show collections
+employees
+> db.getName()
+test
+
+----------------------------------
+create database
+> use newskill
+switched to db newskill
+
+
+Create collection
+---------------------------------
+db.createCollection("stud")
+
+
+show collections        
+----------------------------------
+
+Basic CRUD Operations in simple way:
+------------------------------------
+1. C--->Create|Insert document
+------------------------------
+How to insert document into the collection
+db.collection.insertOne()
+db.collection.insertMany()
+db.collection.insert()
+
+
+db.stud.insertOne({sno:111,sname:"Ram",fees:37500,course:"Node"})
+db.stud.insertOne({sno:112,sname:"Raj",fees:45000,course:"FullStack"})
+db.stud.insertOne({sno:113,sname:"a",fees:65000,course:"Django"})
+db.stud.insertOne({sno:114,sname:"b",fees:45000,course:"Node"})
+db.stud.insertOne({sno:115,sname:"c",fees:65000,course:"Flutter"})
+db.stud.insertOne({sno:116,sname:"d",fees:25000,course:"Python"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("61efad80e88d73f5a4ca784f")
+}
+
+
+
+2. R--->Read / Retrieval Operation:
+------------------------------------
+db.collection.find() --->To get all documents present in the given
+collection
+db.collection.findOne() --->To get one document
+
+> db.stud.find()
+
+> db.stud.find().pretty()
+
+
+
+------------------------------------------------------------------------
+
+ db.stud.find({fees:3500});
+
+ db.test.insertMany([
+ {name:"Any", age:"21", status:"busy"},
+ {name:"Tony", age:"25", status:"busy"},
+ {name:"Bobby", age:"28", status:"online"},
+ {name:"Sonny", age:"28", status:"away"},
+ {name:"Cher", age:"20", status:"online"}
+])
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+16-12-22
+
+
+Client_master:-
+db.client_master.insertMany([
+    {Clientno:'C00001',Name:'ivan',city:'bombay',pincode:400054,state:'maharashtra',baldue:15000},
+    {Clientno:'C00002',Name:'vandana',city:'madras',pincode:780001,state:'tamilnadu',baldue:0},
+    {Clientno:'C00003',Name:'pramada',city:'bombay',pincode:400057,state:'maharashtra',baldue:5000},
+    {Clientno:'C00004',Name:'basu',city:'bombay',pincode:400056,state:'maharashtra',baldue:0},
+    {Clientno:'C00005',Name:'ravi',city:'delhi',pincode:100001,state:'',baldue:2000},
+    {Clientno:'C00006',Name:'rukmini',city:'bombay',pincode:400050,state:'maharashtra',baldue:0}
+])
+
+
+salesman_master:-
+db.salesman_master.insertMany([
+    {salesman_no:'S00001', salesmanname:'Kiran', address:'A/14 worli', city:'Bombay', pincode:400002, state:'Mah', salamt:3000, tgttoget:100, ytdsale:50, remark:'Good'},
+    {salesman_no:'S00002', salesmanname:'Manish', address:'65, nariman', city:'Bombay', pincode:400001, state:'Mah', salamt:3000, tgttoget:200, ytdsale:100, remark:'Good'},
+    {salesman_no:'S00003', salesmanname:'Ravi', address:'P-7 Bandra', city:'Bombay', pincode:400032, state:'Mah', salamt:3000, tgttoget:200, ytdsale:100, remark:'Good'},
+    {salesman_no:'S00004', salesmanname:'Ashish', address:'A/5 Juhu', city:'Bombay', pincode:400044, state:'Mah', salamt:3500, tgttoget:200, ytdsale:150, remark:'Good'}
+])
+
+
+product_master:-
+db.product_master.insertMany([
+    {productno:'P00001',description:'1.44floppies',profitpercent:5,unitmeasured:'piece',qtyonhand:100, recorderlvl:20, sellprice:525,costprice:500},
+    {productno:'P03453',description:'Monitors', profitpercent:6, unitmeasured:'piece', qtyonhand:10, recorderlvl:3, sellprice:12000, costprice:11200},
+    {productno:'P06734',description:'Mouse',profitpercent:5, unitmeasured:'piece', qtyonhand:20, recorderlvl:5, sellprice:1050, costprice:500},
+    {productno:'P07865',description:'1.22 floppies',profitpercent:5, unitmeasured:'piece', qtyonhand:100, recorderlvl:20, sellprice:525, costprice:500},
+    {productno:'P07868',description:'Keyboards',profitpercent:2, unitmeasured:'piece', qtyonhand:10, recorderlvl:3, sellprice:3150, costprice:3050},
+    {productno:'P07885',description:'CD Drive',profitpercent:2.50, unitmeasured:'piece',qtyonhand:10,recorderlvl:3,sellprice:5250,costprice:5100},
+    {productno:'P07965',description:'540 HDD',profitpercent:4, unitmeasured:'piece',qtyonhand:10,recorderlvl:3,sellprice:8400, costprice:8000},
+    {productno:'P07975',description:'1.44 Drive',profitpercent:5,unitmeasured:'piece', qtyonhand:10, recorderlvl:3, sellprice:1050, costprice:1000},
+    {productno:'P08865',description:'1.22 Drive',profitpercent:5,unitmeasured:'piece',qtyonhand:2,recorderlvl:3, sellprice:1050, costprice:1000},
+])
+
+
+
+
+skip:-
+db.client_master.find({}).skip(3) //skip first three data
+
+sort:-
+// by default in acsending order
+db.client_master.find({}).sort({"Name":1})   // in ascending order
+db.client_master.find({}).sort({"Name":-1})   // in descending order
+
+count:-
+db.client_master.find({}).count()        // will be the count the data
+
+find:-
+db.collection_name.find({"key":"value"})
+db.client_master.find({"Name":'basu'})   // one data will be selected
+
+
+comparison_query_operators:- 
+
+db.client_master.find({"baldue":{$eq:0}})          // equal to
+db.client_master.find({"baldue":{$ne:0}})          // not equal to
+db.client_master.find({"baldue":{$gt:12000}})      // greater then
+db.client_master.find({"baldue":{$gte:12000}})     // greater then equal to 
+db.client_master.find({"baldue":{$lt:1000}})       // less then 
+db.client_master.find({"baldue":{$lte:1000}})      // less then equal to 
+db.client_master.find({"baldue":{$in:[2000,0]}})   // in 
+db.client_master.find({"baldue":{$nin:[2000,0]}})  // not in 
+
+
+
+logical_query_operators:-
+
+db.collection.find({$and:[{"field":"value"},{"field":"value"}]})
+
+db.client_master.find({$and:[{"Name":{$eq:"basu"}},{"state":{$eq:'maharashtra'}}]}) // and
+db.client_master.find({$or:[{"baldue":{$ne:0}},{"state":{$in:['maharashtra']}}]})   // or
+db.client_master.find({"baldue":{$not:{$lt:1000}}})                                 //not
+
+
+// query:-
+// 1. find out the names of all client 
+   db.client_master.find()
+
+// 2. Retrieve the entire contents of the Client Master table.
+   db.client_master.find()
+
+// 3. Retrieve the list of names, city and the sate of all the clients.
+   db.client_master.find()
+
+// 4. List the various products available from the Product Master table.
+   db.product_master.find()
+
+// 5. List all the clients who are located in bombay.
+   db.client_master.find({"city":{$eq:"bombay"}})
+
+// 6. Find the names of salesmen who have a salary equal to Rs.3000.
+   db.salesman_master.find({"salamt":{$eq:3000}})
+
+ 
