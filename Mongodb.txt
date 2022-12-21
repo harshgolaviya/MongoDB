@@ -251,21 +251,48 @@ db.client_master.find({"baldue":{$not:{$lt:1000}}})                             
 
 // query:-
 // 1. find out the names of all client 
-   db.client_master.find()
+   db.client_master.find({},{"Name":1,"_id":0})
 
 // 2. Retrieve the entire contents of the Client Master table.
    db.client_master.find()
 
 // 3. Retrieve the list of names, city and the sate of all the clients.
-   db.client_master.find()
+  db.client_master.find({},{"Name":1,"city":1,"state":1})
 
 // 4. List the various products available from the Product Master table.
    db.product_master.find()
 
 // 5. List all the clients who are located in bombay.
-   db.client_master.find({"city":{$eq:"bombay"}})
+   db.client_master.find({"city":{$in:["bombay"]}})
 
 // 6. Find the names of salesmen who have a salary equal to Rs.3000.
    db.salesman_master.find({"salamt":{$eq:3000}})
 
+
+load:-
+// create js file and open cmd and create database 
+load('file_name')
  
+
+
+
+delete collection:-
+db.collection_name.drop()
+db.client_master.drop()
+db.product_master.drop()
+
+delete database:-
+db.dropDatabase();
+
+remove documents:-
+db.client_master.remove({})                              // all documents must be deleted.
+db.product_master.remove({qtyonhand:{$eq:10}})           // only query related documents deleted.
+
+update_documents:-
+db.collection_name.update()
+db.student.update({name:"avi"},{$set:{name:"helloword"}})
+db.product_master.update({productno:'P08865'},{$set:{description:'Laptop'}})
+db.product_master.update({productno:'P08865'},{$set:{GST:20}})
+db.product_master.updateMany({},{$set:{Tax:200}})
+
+
