@@ -296,3 +296,56 @@ db.product_master.update({productno:'P08865'},{$set:{GST:20}})
 db.product_master.updateMany({},{$set:{Tax:200}})
 
 
+atlas:- mongodb+srv://admin:<password>@cluster0.qp5wvkf.mongodb.net/test
+
+
+// find datatype
+db.books.find({$isbn:{$type:"int"}})
+db.books.find({$title:{$regex:'^d'}})
+
+$all:-
+{field:{$all:[val1,val2]}}
+// like and query:- 
+{$and:[{$field:val1},{$field:val2}]}
+db.books.find({tags:{$all:['database','sql']}})
+
+$elemMatch:-
+// -use only in Array
+{field:{$elemMatch:{}}}
+db.students.find({marks:{$elemMatch:{$gte:80,$lt:90}}})
+
+$size:-
+{field:{$size:n}}
+db.books.find({tags:{$size:2}})
+
+
+
+
+
+
+
+
+create database
+create collection
+show collection
+basic CRUD operations:-1.insert[insertOne(),insertMany(),insert()]
+                       2.read/retrieval[find(),findOne(),pretty()]
+                       3.update.documents[updateMany(),updateOne()]
+                       4.drop/delete[dropDatabase(),drop(),remove()]
+
+operators:-
+
+1.comparison_query_operators:[$eq,$ne,$gt,$gte,$lt,$lte,$in,$nin]
+
+2.logical_query_operators:[$or,$nor,$and,$not]
+
+atlas:-
+
+login,connect
+connect with mongocompass,mongo shall
+atlas:- mongodb+srv://admin:<password>@cluster0.qp5wvkf.mongodb.net/test
+
+Bsondatatype:-
+how to find datatype in mongodb
+
+1.Array_query_operators:[$all,$elemMatch,$size]

@@ -101,6 +101,37 @@ db.product_master.update({productno:'P08865'},{$set:{GST:20}})
 
 db.product_master.updateMany({},{$set:{Tax:200}})
 
+// find datatype
+db.books.find({isbn:{$type:"int"}})
+db.hanuman.find({isbn:{$type:"string"}})
+db.books.find({title:{$regex:'^d'}})
+
+$all:-
+{field:{$all:[val1,val2]}}
+db.hanuman.find({tags:{$all:['git']}})
+// like and query:- 
+{$and:[{$field:val1},{$field:val2}]}
+db.books.find({tags:{$all:['database','sql']}})
+
+$elemMatch:-    
+// -use only in Array
+{field:{$elemMatch:{}}}
+db.students.find({marks:{$elemMatch:{$gte:80,$lt:90}}})
+db.student.find({marks:{$size:{$eq:1}}})
+
+$size:-
+{field:{$size:n}}
+db.books.find({tags:{$size:2}})
+db.student.find({marks:{$size:1}})
 
 
+db.createCollection('student')
+db.student.insertMany([
+    {sno:1,name:"harsh",marks:[10,30,50,70]},
+    {sno:2,name:"gautam",marks:[70]},
+    {sno:3,name:"dikshit",marks:[90,130,50,70]}
+])
+db.student.insert({sno:4,name:"gautam",marks:[70]})
 
+// how to check field type in mongodb
+typeof db.student.findOne().marks;
